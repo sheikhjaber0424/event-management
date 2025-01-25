@@ -2,8 +2,8 @@
 session_start();
 require_once('../Database/db.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = htmlspecialchars($_POST['email']);
     $password = $_POST['password'];
 
     // Check if user exists
@@ -33,30 +33,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="form-container shadow">
+            <h2 class="text-center">Login</h2>
+            <form method="post" action="login.php">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
 
-    <div class="container mt-5">
-        <h2 class="text-center">Login</h2>
-        <form method="post">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
+            <!-- Display Messages -->
+            <?php if (isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger mt-3"> <?= $_SESSION['error'];
+                                                        unset($_SESSION['error']); ?> </div>
+            <?php endif; ?>
 
-        <?php
-        if (isset($_SESSION['error'])) {
-            echo '<div class="alert alert-danger mt-3" role="alert">' . $_SESSION['error'] . '</div>';
-            unset($_SESSION['error']);
-        }
-        ?>
+            <div class="text-center mt-3">
+                <p>Don’t have an account? <a href="register.php">Register here</a></p>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
