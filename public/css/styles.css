@@ -1,7 +1,33 @@
+html,
 body {
-  background-color: #f8f9fa;
+  height: 100%;
+  margin: 0;
 }
 
+/* Flexbox layout for body */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make the main content area take up available space */
+main {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Footer styling */
+footer {
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Form container */
 .form-container {
   background-color: #ffffff;
   border: 1px solid #dee2e6;
@@ -11,11 +37,13 @@ body {
   padding: 20px;
 }
 
+/* Form title styling */
 .form-container h2 {
   font-size: 1.8rem;
-  color: #343a40;
+  color: #343a40; /* Adjusting color for better readability */
 }
 
+/* Button styling */
 .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
@@ -26,6 +54,7 @@ body {
   border-color: #004085;
 }
 
+/* Link styling */
 a {
   color: #007bff;
   text-decoration: none;
