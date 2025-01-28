@@ -9,8 +9,8 @@
                 <li class="nav-item"><a class="nav-link" href="/index.view.php">Events</a></li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/views/authentication/login.php">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="/views/authentication/register.php">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../controllers/authentication/login.php">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../controllers/authentication/register.php">Register</a></li>
             </ul>
         </div>
     </div>
