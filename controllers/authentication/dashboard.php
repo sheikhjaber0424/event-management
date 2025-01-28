@@ -7,4 +7,4 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 
-require('../../views/authentication/dashboard.view.php');
+require('views/authentication/dashboard.view.php');

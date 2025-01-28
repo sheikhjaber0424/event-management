@@ -1,11 +1,11 @@
 <!-- Login Form Content -->
 <?php
-require('../../views/partials/head.view.php');
-require('../../views/partials/navbar.view.php');
+require('views/partials/head.view.php');
+require('views/partials/navbar.view.php');
 ?>
 <main class="container mt-5">
     <h2 class="text-center">Login</h2>
-    <form class="form-container" method="post" action="login.php">
+    <form class="form-container" method="post" action="/login">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
@@ -29,10 +29,10 @@ require('../../views/partials/navbar.view.php');
     <?php endif; ?>
 
     <div class="text-center mt-3">
-        <p>Don’t have an account? <a href="register.php">Register here</a></p>
+        <p>Don’t have an account? <a href="/register">Register here</a></p>
     </div>
 </main>
 <?php
 
-require('../../views/partials/footer.view.php');
+require('views/partials/footer.view.php');
 ?>

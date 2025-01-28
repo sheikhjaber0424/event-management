@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../../core/database.php');
+require_once('core/database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Collect and sanitize input
@@ -24,12 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['is_admin'] = $user['is_admin'];
 
             $_SESSION['message'] = 'Login successful! Redirecting to dashboard...';
-            header('Location: dashboard.php');
+            header('Location: /dashboard');
             exit();
         } else {
             $_SESSION['error'] = 'Invalid email or password.';
         }
     }
 }
-require('../../views/authentication/login.view.php');
+require('views/authentication/login.view.php');
 // HTML form content goes here (after processing logic)

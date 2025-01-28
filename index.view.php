@@ -6,6 +6,7 @@ require('views/partials/navbar.view.php');
 
 <main class="container mt-5">
     <?php
+
     echo '<p>No content available.</p>';
     ?>
 </main>

@@ -1,12 +1,12 @@
 <?php
-require('../../views/partials/head.view.php');
-require('../../views/partials/navbar.view.php');
+require('views/partials/head.view.php');
+require('views/partials/navbar.view.php');
 
 ?>
 <!-- Register Form Content -->
 <main class="container mt-5">
     <h2 class="text-center">Register</h2>
-    <form class="form-container " method="post" action="register.php">
+    <form class="form-container " method="post" action="/register">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" name="name" id="name" placeholder="Enter your name" required>
@@ -34,11 +34,11 @@ require('../../views/partials/navbar.view.php');
     <?php endif; ?>
 
     <div class="text-center mt-3">
-        <p>Already have an account? <a href="login.php">Login here</a></p>
+        <p>Already have an account? <a href="/login">Login here</a></p>
     </div>
 
 </main>
 <?php
 
-require('../../views/partials/footer.view.php');
+require('views/partials/footer.view.php');
 ?>
