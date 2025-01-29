@@ -1,7 +1,8 @@
 <?php
-
 require('views/partials/head.view.php');
 require('views/partials/navbar.view.php');
+
+
 ?>
 
 <main class="container mt-5">
