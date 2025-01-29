@@ -2,6 +2,7 @@
 
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
+
 $routes = [
     '/' =>  'index.view.php',
     '/login' => 'controllers/authentication/login.php',
