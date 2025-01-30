@@ -10,7 +10,8 @@ $routes = [
     '/dashboard' => 'controllers/authentication/dashboard.php',
     '/logout' => 'controllers/authentication/logout.php',
     '/admin/events' => 'controllers/events/index.php',
-    '/admin/events/create' => 'controllers/events/create.php'
+    '/admin/events/create' => 'controllers/events/create.php',
+    '/admin/events/store' => 'controllers/events/store.php'
 ];
 
 
