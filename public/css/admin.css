@@ -64,7 +64,11 @@ body {
 .logout {
   margin-right: 80px;
 }
-
+.main-content {
+  background-color: #f8f9fa;
+  min-height: 87vh;
+  border-radius: 5px;
+}
 @media (max-width: 768px) {
   .sidebar {
     left: -250px;

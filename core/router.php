@@ -8,7 +8,9 @@ $routes = [
     '/login' => 'controllers/authentication/login.php',
     '/register' => 'controllers/authentication/register.php',
     '/dashboard' => 'controllers/authentication/dashboard.php',
-    '/logout' => 'controllers/authentication/logout.php'
+    '/logout' => 'controllers/authentication/logout.php',
+    '/admin/events' => 'controllers/events/index.php',
+    '/admin/events/create' => 'controllers/events/create.php'
 ];
 
 
