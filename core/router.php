@@ -12,7 +12,9 @@ $routes = [
     '/admin/events' => 'controllers/events/index.php',
     '/admin/events/create' => 'controllers/events/create.php',
     '/admin/events/store' => 'controllers/events/store.php',
-    '/admin/events/delete' => 'controllers/events/delete.php'
+    '/admin/events/delete' => 'controllers/events/delete.php',
+    '/admin/events/edit' => 'controllers/events/edit.php',
+    '/admin/events/update' => 'controllers/events/update.php'
 ];
 
 

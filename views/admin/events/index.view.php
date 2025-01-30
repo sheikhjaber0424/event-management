@@ -2,8 +2,23 @@
     <?php require('views/admin/partials/navbar.view.php'); ?>
     <div class="container mt-3">
         <div class="row d-flex justify-content-center align-items-center main-content p-3">
+
+            <!-- Message Alert -->
+            <?php if (isset($_SESSION['message'])) : ?>
+                <?php
+                $messageType = $_SESSION['message_type'] ?? 'success'; // Default to 'success' if not set
+                ?>
+                <div class="alert alert-<?php echo $messageType; ?> alert-dismissible fade show mb-1" role="alert" id="auto-dismiss-alert">
+                    <?php echo $_SESSION['message']; ?>
+                </div>
+                <?php
+                unset($_SESSION['message']); // Clear the message after displaying
+                unset($_SESSION['message_type']); // Clear the message type after displaying
+                ?>
+            <?php endif; ?>
+
             <!-- Search and Add New Button Container -->
-            <h2 class="text-center">Event List</h2>
+            <h2 class="text-center">Events List</h2>
             <div class="d-flex justify-content-between align-items-center  w-100">
                 <!-- Add New Button -->
                 <a href="/admin/events/create" class="ms-2">
@@ -21,19 +36,7 @@
 
             </div>
 
-            <!-- Message Alert -->
-            <?php if (isset($_SESSION['message'])) : ?>
-                <?php
-                $messageType = $_SESSION['message_type'] ?? 'success'; // Default to 'success' if not set
-                ?>
-                <div class="alert alert-<?php echo $messageType; ?> alert-dismissible fade show mb-1" role="alert" id="auto-dismiss-alert">
-                    <?php echo $_SESSION['message']; ?>
-                </div>
-                <?php
-                unset($_SESSION['message']); // Clear the message after displaying
-                unset($_SESSION['message_type']); // Clear the message type after displaying
-                ?>
-            <?php endif; ?>
+
 
             <!-- Table -->
             <div class="table-responsive " style="overflow-x: auto; border: 1px solid #ddd; border-radius: 5px; padding: 10px; background-color: white;min-height:60vh">
