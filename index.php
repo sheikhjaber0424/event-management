@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once('router.php');
 require_once('functions.php');
 require_once('Database.php');
@@ -10,15 +10,12 @@ require_once('Database.php');
 // dd('helo');
 
 // $config = require('config.php');
-// $db = new Database($config);
+// $db = new Database($config['database']);
 
 
 // Fetch user with id=1
-// $statement = $db->query("SELECT * FROM users WHERE id = 1");
+// $id = $_GET['id'];
+// $query = "SELECT * FROM users WHERE id = :id";
 
-// if ($statement) {
-//     $user = $statement->fetch();
-//     dd($user ?: "No user found.");
-// } else {
-//     dd("Query failed.");
-// }
+// $users = $db->query("SELECT * FROM users WHERE id = 1")->fetch();
+// dd($users);

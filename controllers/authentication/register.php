@@ -1,9 +1,9 @@
 <?php
-session_start();
+
 require_once('Database.php');
 
 $config = require('config.php');
-$db = new Database($config);
+$db = new Database($config['database']);
 
 if (isset($_SESSION['user_id'])) {
     header('Location: /login');
