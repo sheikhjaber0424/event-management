@@ -20,6 +20,6 @@ window.onload = function () {
       setTimeout(function () {
         alertMessage.remove();
       }, 500); // Wait for the fade-out transition to complete (Bootstrap's fade duration)
-    }, 2000); // 2000 milliseconds = 2 seconds
+    }, 3000); // 2000 milliseconds = 2 seconds
   }
 };
