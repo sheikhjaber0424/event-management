@@ -1,7 +1,7 @@
 <div class="content">
     <?php require('views/admin/partials/navbar.view.php'); ?>
     <div class="container mt-3">
-        <div class="row d-flex justify-content-center align-items-center main-content p-3">
+        <div class="row d-flex justify-content-center align-items-start main-content p-3">
 
             <!-- Message Alert -->
             <?php if (isset($_SESSION['message'])) : ?>
@@ -66,6 +66,7 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
+                                    <a href="/admin/event?id=<?= $event['id'] ?>" class="btn btn-sm btn-success">View</a>
                                     <a href="/admin/events/edit?id=<?= $event['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
                                     <form action="/admin/events/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
                                         <input type="hidden" name="id" value="<?= $event['id'] ?>">
