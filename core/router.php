@@ -11,7 +11,8 @@ $routes = [
     '/logout' => 'controllers/authentication/logout.php',
     '/admin/events' => 'controllers/events/index.php',
     '/admin/events/create' => 'controllers/events/create.php',
-    '/admin/events/store' => 'controllers/events/store.php'
+    '/admin/events/store' => 'controllers/events/store.php',
+    '/admin/events/delete' => 'controllers/events/delete.php'
 ];
 
 

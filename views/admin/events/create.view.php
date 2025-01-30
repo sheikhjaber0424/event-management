@@ -10,7 +10,7 @@ require('views/admin/partials/sidebar.view.php');
 <div class="content">
     <?php require('views/admin/partials/navbar.view.php'); ?>
 
-    <div class="px-3">
+    <div class=" container px-3">
         <div class="row d-flex justify-content-center align-items-center main-content">
             <div class="col-md-6">
                 <?php

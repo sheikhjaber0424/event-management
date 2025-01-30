@@ -1,44 +1,49 @@
-<?php
-require('views/admin/partials/head.view.php');
-require('views/admin/partials/sidebar.view.php');
-
-// Database connection
-require('core/Database.php');
-$config = require('core/config.php');
-$db = new Database($config['database']);
-
-// Pagination settings
-$limit = 10; // Records per page
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$offset = ($page - 1) * $limit;
-
-// Fetch paginated events
-$events = $db->query("SELECT * FROM events LIMIT $limit OFFSET $offset")->fetchAll();
-
-// Get total event count
-$totalEvents = $db->query("SELECT COUNT(*) as count FROM events")->fetch()['count'];
-$totalPages = ceil($totalEvents / $limit);
-?>
-
 <div class="content">
     <?php require('views/admin/partials/navbar.view.php'); ?>
-    <div class="container mt-4">
+    <div class="container mt-3">
         <div class="row d-flex justify-content-center align-items-center main-content p-3">
+            <!-- Search and Add New Button Container -->
+            <h2 class="text-center">Event List</h2>
+            <div class="d-flex justify-content-between align-items-center  w-100">
+                <!-- Add New Button -->
+                <a href="/admin/events/create" class="ms-2">
+                    <button class="btn btn-primary">Add New</button>
+                </a>
 
-            <a href="/admin/events/create">
-                <button class="btn btn-primary">Add New</button>
-            </a>
+                <!-- Search Form -->
+                <form action="/admin/events" method="GET" class="mb-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search by name or desc..">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
 
-            <div class="table-responsive mt-4" style="overflow-x: auto; border: 1px solid #ddd; border-radius: 5px; padding: 10px; background-color: white;">
+
+            </div>
+
+            <!-- Message Alert -->
+            <?php if (isset($_SESSION['message'])) : ?>
+                <?php
+                $messageType = $_SESSION['message_type'] ?? 'success'; // Default to 'success' if not set
+                ?>
+                <div class="alert alert-<?php echo $messageType; ?> alert-dismissible fade show mb-1" role="alert" id="auto-dismiss-alert">
+                    <?php echo $_SESSION['message']; ?>
+                </div>
+                <?php
+                unset($_SESSION['message']); // Clear the message after displaying
+                unset($_SESSION['message_type']); // Clear the message type after displaying
+                ?>
+            <?php endif; ?>
+
+            <!-- Table -->
+            <div class="table-responsive " style="overflow-x: auto; border: 1px solid #ddd; border-radius: 5px; padding: 10px; background-color: white;min-height:60vh">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-
                             <th>Date</th>
                             <th>Capacity</th>
-
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -48,10 +53,8 @@ $totalPages = ceil($totalEvents / $limit);
                             <tr>
                                 <td><?= htmlspecialchars($event['id']) ?></td>
                                 <td><?= htmlspecialchars($event['name']) ?></td>
-                                <!-- <td><?= htmlspecialchars(substr($event['description'], 0, 50)) ?>...</td> -->
                                 <td><?= htmlspecialchars($event['date']) ?></td>
                                 <td><?= htmlspecialchars($event['capacity']) ?></td>
-                                <!-- <td><?= htmlspecialchars($event['location'] ?? 'N/A') ?></td> -->
                                 <td>
                                     <?php if (!empty($event['image'])) : ?>
                                         <img src="<?= htmlspecialchars($event['image']) ?>" alt="Event Image" width="50">
@@ -73,30 +76,31 @@ $totalPages = ceil($totalEvents / $limit);
             </div>
 
             <!-- Pagination -->
-            <div class="mt-3">
-                <nav>
-                    <ul class="pagination justify-content-center">
-                        <?php if ($page > 1) : ?>
-                            <li class="page-item">
-                                <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
-                            </li>
-                        <?php endif; ?>
+            <?php if ($totalPages > 1) : ?>
+                <div class="mt-1">
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <?php if ($page > 1) : ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?= $page - 1 ?>&search=<?= htmlspecialchars($search) ?>">Previous</a>
+                                </li>
+                            <?php endif; ?>
 
-                        <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                            <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                            </li>
-                        <?php endfor; ?>
+                            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                                <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $i ?>&search=<?= htmlspecialchars($search) ?>"><?= $i ?></a>
+                                </li>
+                            <?php endfor; ?>
 
-                        <?php if ($page < $totalPages) : ?>
-                            <li class="page-item">
-                                <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </nav>
-            </div>
-
+                            <?php if ($page < $totalPages) : ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?= $page + 1 ?>&search=<?= htmlspecialchars($search) ?>">Next</a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </nav>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
