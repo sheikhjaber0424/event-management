@@ -1,8 +1,8 @@
 <?php
 
-require_once('Database.php');
+require_once('core/Database.php');
 
-$config = require('config.php');
+$config = require('core/config.php');
 $db = new Database($config['database']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
