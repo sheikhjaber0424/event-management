@@ -5,8 +5,8 @@ require_once('core/Database.php');
 $config = require('core/config.php');
 $db = new Database($config['database']);
 
-$events = $db->query("SELECT * FROM events")->fetchAll();
-// dd($events);
+$events = $db->query("SELECT * FROM events LIMIT 6")->fetchAll();
+
 ?>
 
 <main class="container mt-5 mb-5">
@@ -46,7 +46,7 @@ $events = $db->query("SELECT * FROM events")->fetchAll();
 
         <!-- View More Button -->
         <div class="text-center mt-4">
-            <a href="/events.php" class="btn btn-primary btn-lg">View More Events</a>
+            <a href="/events" class="btn btn-primary btn-lg">View More Events</a>
         </div>
     </section>
 

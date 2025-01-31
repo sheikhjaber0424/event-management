@@ -1,6 +1,4 @@
 <?php
-require('views/admin/partials/head.view.php');
-require('views/admin/partials/sidebar.view.php');
 
 // Database connection
 require('core/Database.php');
