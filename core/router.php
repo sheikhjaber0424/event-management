@@ -16,6 +16,9 @@ $routes = [
     '/admin/events/delete' => 'controllers/events/delete.php',
     '/admin/events/edit' => 'controllers/events/edit.php',
     '/admin/events/update' => 'controllers/events/update.php',
+    '/admin/users' => 'controllers/users/index.php',
+    '/admin/users/create' => 'controllers/users/create.php',
+    '/admin/users/store' => 'controllers/users/store.php',
 
 ];
 

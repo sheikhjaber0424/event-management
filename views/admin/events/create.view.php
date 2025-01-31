@@ -17,7 +17,7 @@ require('views/admin/partials/sidebar.view.php');
                 if (isset($_SESSION['message'])):
                     $messageType = $_SESSION['message_type'] ?? 'success'; // Default to 'success' if not set
                 ?>
-                    <div class="alert alert-<?php echo $messageType; ?> alert-dismissible fade show" role="alert" id="auto-dismiss-alert">
+                    <div class="alert alert-<?php echo $messageType; ?> alert-dismissible fade show text-center" role="alert" id="auto-dismiss-alert">
                         <?php echo $_SESSION['message']; ?>
                     </div>
                 <?php
