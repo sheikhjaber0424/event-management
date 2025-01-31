@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unlink($imagePath);
         }
 
-        $imageName = uniqid('_event_', true) . '.' . pathinfo($image['name'], PATHINFO_EXTENSION);
+        $imageName = uniqid('event_', true) . '.' . pathinfo($image['name'], PATHINFO_EXTENSION);
 
         if (!move_uploaded_file($image['tmp_name'], $uploadDir . $imageName)) {
             $_SESSION['errors']['image'] = 'Failed to upload image.';

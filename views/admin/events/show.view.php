@@ -9,7 +9,7 @@ require('views/admin/partials/sidebar.view.php');
     <div class="container px-3">
 
         <div class="row d-flex justify-content-center align-items-start main-content p-md-3 p-sm-1">
-            <div class="col-md-10">
+            <div class="col-md-8">
 
                 <!-- Back Button -->
                 <div class="mb-3">
@@ -22,7 +22,9 @@ require('views/admin/partials/sidebar.view.php');
                 <div class="card">
                     <!-- Event Image -->
                     <?php if (!empty($event['image'])): ?>
-                        <img src="<?php echo $event['image']; ?>" class="card-img-top" alt="Event Image" style="max-height: 400px; object-fit: cover;">
+                        <img src="<?= '/' . $event['image']; ?>" class="card-img-top" alt="Event Image" style="height: 400px; width: 100%; object-fit: fill;">
+
+
                     <?php else: ?>
                         <div class="text-center py-5 bg-light">
                             <span class="text-muted">No Image Available</span>

@@ -56,11 +56,12 @@
                             <tr>
                                 <td><?= htmlspecialchars($event['id']) ?></td>
                                 <td><?= htmlspecialchars($event['name']) ?></td>
-                                <td><?= htmlspecialchars($event['date']) ?></td>
+                                <td><?= date('F j, Y', strtotime($event['date'])) ?></td>
                                 <td><?= htmlspecialchars($event['capacity']) ?></td>
                                 <td>
                                     <?php if (!empty($event['image'])) : ?>
-                                        <img src="<?= htmlspecialchars($event['image']) ?>" alt="Event Image" width="50">
+                                        <img src="<?= '/' . $event['image']; ?>" alt="Event Image" width="50">
+
                                     <?php else : ?>
                                         No Image
                                     <?php endif; ?>
