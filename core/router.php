@@ -19,6 +19,7 @@ $routes = [
     '/admin/users' => 'controllers/users/index.php',
     '/admin/users/create' => 'controllers/users/create.php',
     '/admin/users/store' => 'controllers/users/store.php',
+    '/admin/users/edit' => 'controllers/users/edit.php',
 
 ];
 
