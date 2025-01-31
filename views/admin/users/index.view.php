@@ -61,7 +61,7 @@
                                     } elseif ($user['is_admin'] == 2) {
                                         echo "Admin";
                                     } else {
-                                        echo "Atendee";
+                                        echo "Attendee";
                                     }
                                     ?></td>
                                 <td>

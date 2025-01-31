@@ -21,6 +21,7 @@ $routes = [
     '/admin/users/store' => 'controllers/users/store.php',
     '/admin/users/edit' => 'controllers/users/edit.php',
     '/admin/users/update' => 'controllers/users/update.php',
+    '/admin/users/delete' => 'controllers/users/delete.php',
 
 ];
 
