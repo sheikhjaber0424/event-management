@@ -2,11 +2,10 @@
 require_once('core/functions.php');
 require('core/Database.php');
 
-// Get the event ID from the query string
+
 $eventId = $_GET['id'] ?? null;
 
 if (!$eventId) {
-    // Redirect to the events list if no ID is provided
     header('Location: /admin/events');
     exit();
 }
@@ -131,9 +130,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Redirect back to the edit page
-    header('Location: /admin/events/edit?id=' . $eventId);
+    header('Location: /admin/events');
     exit();
 }
-
-// Pass the event data to the view
-// require('views/admin/events/edit.view.php');

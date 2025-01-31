@@ -3,6 +3,7 @@ require_once('core/functions.php');
 require('core/Database.php');
 
 // Check if the user ID is provided
+
 if (!isset($_GET['id'])) {
     $_SESSION['message'] = 'User ID is required.';
     $_SESSION['message_type'] = 'danger';
@@ -16,6 +17,8 @@ $userId = $_GET['id'];
 $config = require('core/config.php');
 $db = new Database($config['database']);
 $user = $db->query("SELECT * FROM users WHERE id = ?", [$userId])->fetch();
+
+
 
 if (!$user) {
     $_SESSION['message'] = 'User not found.';

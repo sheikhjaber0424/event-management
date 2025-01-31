@@ -1,7 +1,9 @@
 <?php
 require('views/admin/partials/head.view.php');
 require('views/admin/partials/sidebar.view.php');
+
 ?>
+
 
 <div class="content">
     <?php require('views/admin/partials/navbar.view.php'); ?>
@@ -31,7 +33,7 @@ require('views/admin/partials/sidebar.view.php');
                 <h2 class="text-center mb-3">Edit User</h2>
                 <div class="card">
                     <div class="card-body">
-                        <form action="/admin/users/edit" method="POST">
+                        <form action="/admin/users/update?id=<?= $user['id'] ?>" method="POST">
                             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
 
                             <div class="mb-3">

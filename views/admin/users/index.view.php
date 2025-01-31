@@ -9,11 +9,16 @@
 
             <!-- Message Alert -->
             <?php if (isset($_SESSION['message'])) : ?>
-                <?php $messageType = $_SESSION['message_type'] ?? 'success'; ?>
-                <div class="alert alert-<?= $messageType ?> alert-dismissible fade show mb-1 text-center" role="alert">
-                    <?= $_SESSION['message']; ?>
+                <?php
+                $messageType = $_SESSION['message_type'] ?? 'success'; // Default to 'success' if not set
+                ?>
+                <div class="text-center alert alert-<?php echo $messageType; ?> alert-dismissible fade show mb-1" role="alert" id="auto-dismiss-alert">
+                    <?php echo $_SESSION['message']; ?>
                 </div>
-                <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
+                <?php
+                unset($_SESSION['message']); // Clear the message after displaying
+                unset($_SESSION['message_type']); // Clear the message type after displaying
+                ?>
             <?php endif; ?>
 
             <!-- Search and Add New Button Container -->
@@ -60,11 +65,18 @@
                                     }
                                     ?></td>
                                 <td>
-                                    <a href="/admin/users/edit?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
-                                    <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
-                                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                    </form>
+                                    <?php if ($_SESSION['is_admin'] == 1): ?>
+                                        <a href="/admin/users/edit?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
+                                    <?php endif; ?>
+
+
+                                    <?php if ($user['is_admin'] != 1): ?>
+                                        <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                            <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    <?php endif; ?>
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>
