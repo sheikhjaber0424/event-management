@@ -23,7 +23,8 @@ $routes = [
     '/admin/users/update' => 'controllers/admin/users/update.php',
     '/admin/users/delete' => 'controllers/admin/users/delete.php',
     '/event' => 'controllers/events/show.php',
-    '/event/register' => 'controllers/events/register.php',
+    '/events/register' => 'controllers/events/register.php',
+    '/events/confirmation' => 'controllers/events/confirmation.php',
 
 ];
 

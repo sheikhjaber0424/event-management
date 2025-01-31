@@ -2,15 +2,22 @@
 require_once('core/functions.php');
 require('core/Database.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /login");
+    exit();
+}
+
+$config = require('core/config.php');
+$db = new Database($config['database']);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Initialize error array
     $errors = [];
 
     // Get form data
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
-    $userType = $_POST['is_admin']; // User type (1, 2, or 3)
+    $eventId = $_POST['event_id'];
 
     // Validate name
     if (empty($name)) {
@@ -26,63 +33,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['email'] = 'Invalid email format.';
     }
 
-    // Validate password
-    if (empty($password)) {
-        $errors['password'] = 'Password is required.';
-    } elseif (strlen($password) < 8) {
-        $errors['password'] = 'Password must be at least 8 characters long.';
-    }
-
-    // Validate user type
-    if (empty($userType) || !in_array($userType, [1, 2, 3])) {
-        $errors['is_admin'] = 'Please select a valid user type.';
+    // Validate event ID
+    if (empty($eventId)) {
+        $errors['event_id'] = 'Event ID is required.';
     }
 
     // If there are any validation errors, store them in session and redirect back
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        header('Location: /admin/users/create');
+        header("Location: /event?id=$eventId");
         exit();
     }
 
-    // Hash the password
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-    // Database connection setup
-    $config = require('core/config.php');
-    $db = new Database($config['database']);
-
-    // Check if the email already exists in the database
-    $user = $db->query("SELECT * FROM users WHERE email = ?", [$email])->fetch();
-
-    if ($user) {
-        $_SESSION['errors']['email'] = 'Email is already registered.';
-        header('Location: /admin/users/create');
+    // Check event capacity
+    $event = $db->query("SELECT capacity, is_full FROM events WHERE id = ?", [$eventId])->fetch();
+    if ($event['is_full']) {
+        $_SESSION['errors']['capacity'] = "This event is full.";
+        header("Location: /event?id=$eventId");
         exit();
     }
 
-    // Define the params array
-    $params = [
-        ':name' => $name,
-        ':email' => $email,
-        ':password' => $hashedPassword,
-        ':is_admin' => $userType,
-    ];
+    if ($event['capacity'] > 0) {
+        // Decrease capacity
+        $db->query("UPDATE events SET capacity = capacity - 1 WHERE id = ?", [$eventId]);
 
-    // Prepare the SQL query
-    $query = "INSERT INTO users (name, email, password, is_admin) 
-              VALUES (:name, :email, :password, :is_admin)";
+        // Update is_full if capacity is 0
+        if ($event['capacity'] - 1 == 0) {
+            $db->query("UPDATE events SET is_full = 1 WHERE id = ?", [$eventId]);
+        }
 
-    // Execute the query
-    if ($db->query($query, $params)) {
-        $_SESSION['message'] = 'User created successfully!';
+        // Insert into event_register table
+        $insertQuery = "INSERT INTO event_registration (user_id, event_id) VALUES (?, ?)";
+        $db->query($insertQuery, [$_SESSION['user_id'], $eventId]);
+
+        $_SESSION['message'] = 'You have successfully registered for the event.';
         $_SESSION['message_type'] = 'success';
     } else {
-        $_SESSION['message'] = 'Failed to create user';
-        $_SESSION['message_type'] = 'danger';  // 'danger' is commonly used for errors
+        $_SESSION['errors']['capacity'] = "This event is full.";
     }
 
-    // Redirect to the user creation page after form submission
-    header('Location: /admin/users/create');
+    // Redirect to the event page after form submission
+    header("Location: /event?id=$eventId");
     exit();
 }
