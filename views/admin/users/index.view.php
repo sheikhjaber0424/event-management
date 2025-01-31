@@ -1,5 +1,8 @@
-<?php require('views/admin/partials/head.view.php'); ?>
-<?php require('views/admin/partials/sidebar.view.php'); ?>
+<?php
+require('views/admin/partials/head.view.php');
+require('views/admin/partials/sidebar.view.php');
+?>
+
 
 <div class="content">
     <?php require('views/admin/partials/navbar.view.php'); ?>
@@ -65,12 +68,12 @@
                                     }
                                     ?></td>
                                 <td>
-                                    <?php if ($_SESSION['is_admin'] == 1): ?>
+                                    <?php if ($_SESSION['is_admin'] == 3): ?>
                                         <a href="/admin/users/edit?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
                                     <?php endif; ?>
 
 
-                                    <?php if ($user['is_admin'] != 1): ?>
+                                    <?php if ($user['is_admin'] == 2 || $user['is_admin'] == 3): ?>
                                         <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
                                             <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>

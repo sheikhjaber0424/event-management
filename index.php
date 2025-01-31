@@ -1,16 +1,18 @@
 <?php
 session_start();
+
 require_once('core/router.php');
 require_once('core/functions.php');
 require_once('core/Database.php');
 
 
+// Redirect to home page
+
 
 
 // // dd('hello');
 
-// $config = require('core/config.php');
-// $db = new Database($config['database']);
+
 
 // // $id = $_GET['id'];
 // // $query = "SELECT * FROM users WHERE id = :id";

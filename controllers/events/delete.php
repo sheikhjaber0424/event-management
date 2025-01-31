@@ -1,11 +1,6 @@
 <?php
 
-if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 1 || $_SESSION['user_id'] != 2) {
-    $_SESSION['message'] = 'You do not have permission to delete events.';
-    $_SESSION['message_type'] = 'danger';
-    header('Location: /admin/events');
-    exit();
-}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $eventId = $_POST['id'];
