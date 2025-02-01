@@ -1,10 +1,3 @@
-<?php
-require_once('core/Database.php');
-$config = require('core/config.php');
-$db = new Database($config['database']);
-$user = $db->query("SELECT * FROM users WHERE id = ?", [$_SESSION['user_id']])->fetch();
-
-?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
     <div class="container-fluid">
         <span class="navbar-brand">Dashboard</span>
@@ -19,7 +12,7 @@ $user = $db->query("SELECT * FROM users WHERE id = ?", [$_SESSION['user_id']])->
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
                 <?php
-                echo $user['name'] ?>
+                echo $_SESSION['user_name'] ?>
             </a>
             <ul
                 class="dropdown-menu dropdown-menu-end"

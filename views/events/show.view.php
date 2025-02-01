@@ -2,22 +2,7 @@
 require('views/partials/head.view.php');
 require('views/partials/navbar.view.php');
 
-$isLoggedIn = isset($_SESSION['user_id']); // Check if user is logged in
-$config = require('core/config.php');
-$db = new Database($config['database']);
 
-// Fetch event details including is_full status
-$eventId = $_GET['id'] ?? null;
-$event = $db->query("SELECT * FROM events WHERE id = ?", [$eventId])->fetch();
-
-if (!$event) {
-    die("Event not found.");
-}
-
-$eventRegisterUrl = $isLoggedIn ? "/events/register?id=" . $event['id'] : "/login";
-
-// Check if the user is already registered
-$existingRegistration = $isLoggedIn ? $db->query("SELECT * FROM event_registration WHERE user_id = ? AND event_id = ?", [$_SESSION['user_id'], $eventId])->fetch() : null;
 ?>
 
 <main class="container mt-5 mb-5">
@@ -53,8 +38,13 @@ $existingRegistration = $isLoggedIn ? $db->query("SELECT * FROM event_registrati
                     <p class="text-danger"> Registration for this event is closed. The event is full.</p>
 
                 <?php else: ?>
-                    <a href="<?= $eventRegisterUrl; ?>" class="btn btn-success">Register</a>
+                    <a href="<?= $eventRegisterUrl; ?>">
+
+                        <button class="btn btn-success">Register</button></a>
                 <?php endif; ?>
+                <a href="/events">
+
+                    <button class="btn btn-primary">Events</button></a>
             </div>
         </div>
     </div>

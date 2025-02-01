@@ -1,27 +1,7 @@
 <?php
-
 require('views/partials/head.view.php');
 require('views/partials/navbar.view.php');
-require_once('core/Database.php');
-require_once('core/functions.php');
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: /login");
-    exit();
-}
-
-$eventId = $_GET['id'] ?? null;
-$config = require('core/config.php');
-$db = new Database($config['database']);
-
-$event = $db->query("SELECT name, capacity FROM events WHERE id = ?", [$eventId])->fetch();
-$user = $db->query("SELECT * FROM users WHERE id = ?", [$_SESSION['user_id']])->fetch();
-
-if (!$event) {
-    die("Event not found.");
-}
 ?>
-
 <main class="container mt-5">
     <h2 class="text-center text-success">Register for Event</h2>
 
@@ -37,7 +17,7 @@ if (!$event) {
 
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control border-success <?= isset($_SESSION['errors']['name']) ? 'is-invalid' : ''; ?>" name="name" id="name" value="<?= htmlspecialchars($user['name']); ?>" required>
+            <input type="text" class="form-control border-success <?= isset($_SESSION['errors']['name']) ? 'is-invalid' : ''; ?>" name="name" id="name" value="<?= htmlspecialchars($_SESSION['user_name']); ?>" required>
             <?php if (isset($_SESSION['errors']['name'])): ?>
                 <div class="invalid-feedback"><?= htmlspecialchars($_SESSION['errors']['name']); ?></div>
             <?php endif; ?>
@@ -45,7 +25,7 @@ if (!$event) {
 
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control border-success <?= isset($_SESSION['errors']['email']) ? 'is-invalid' : ''; ?>" name="email" id="email" value="<?= htmlspecialchars($user['email']); ?>" required>
+            <input type="email" class="form-control border-success <?= isset($_SESSION['errors']['email']) ? 'is-invalid' : ''; ?>" name="email" id="email" value="<?= htmlspecialchars($_SESSION['user_email']); ?>" required>
             <?php if (isset($_SESSION['errors']['email'])): ?>
                 <div class="invalid-feedback"><?= htmlspecialchars($_SESSION['errors']['email']); ?></div>
             <?php endif; ?>

@@ -14,7 +14,7 @@
                     <!-- User is logged in -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?= htmlspecialchars($_SESSION['username']); ?> <!-- Display username -->
+                            <?= htmlspecialchars($_SESSION['user_name']); ?> <!-- Display username -->
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
