@@ -11,17 +11,13 @@ require('views/admin/partials/sidebar.view.php');
     <div class="container px-3">
         <div class="row d-flex justify-content-center align-items-center main-content">
             <div class="col-md-6">
-                <?php if (isset($_SESSION['message'])) : ?>
-                    <?php
-                    $messageType = $_SESSION['message_type'] ?? 'success'; // Default to 'success' if not set
-                    ?>
-                    <div class="text-center alert alert-<?php echo $messageType; ?> alert-dismissible fade show mb-1" role="alert" id="auto-dismiss-alert">
-                        <?php echo $_SESSION['message']; ?>
+                <?php if (isset($_SESSION['message'])): ?>
+                    <div class="alert alert-<?= $_SESSION['message_type'] ?? 'success'; ?> alert-dismissible fade show text-center custom-alert"
+                        role="alert" id="auto-dismiss-alert">
+                        <?= htmlspecialchars($_SESSION['message']); ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <?php
-                    unset($_SESSION['message']); // Clear the message after displaying
-                    unset($_SESSION['message_type']); // Clear the message type after displaying
-                    ?>
+                    <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
                 <?php endif; ?>
 
                 <div class="mb-1">

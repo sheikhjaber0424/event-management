@@ -91,3 +91,20 @@ body {
     display: none;
   }
 }
+
+.custom-alert {
+  position: absolute;
+  top: 100px;
+  left: 80%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  width: 20%;
+}
+
+/* Responsive: Adjust for small screens */
+@media (max-width: 768px) {
+  .custom-alert {
+    width: 50%;
+    left: 50%;
+  }
+}

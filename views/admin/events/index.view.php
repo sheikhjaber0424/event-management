@@ -10,18 +10,16 @@ require('views/admin/partials/sidebar.view.php');
         <div class="row d-flex justify-content-center align-items-start main-content p-3">
 
             <!-- Message Alert -->
-            <?php if (isset($_SESSION['message'])) : ?>
-                <?php
-                $messageType = $_SESSION['message_type'] ?? 'success'; // Default to 'success' if not set
-                ?>
-                <div class="alert alert-<?php echo $messageType; ?> alert-dismissible fade show mb-1 text-center" role="alert" id="auto-dismiss-alert">
-                    <?php echo $_SESSION['message']; ?>
+
+            <?php if (isset($_SESSION['message'])): ?>
+                <div class="alert alert-<?= $_SESSION['message_type'] ?? 'success'; ?> alert-dismissible fade show text-center custom-alert"
+                    role="alert" id="auto-dismiss-alert">
+                    <?= htmlspecialchars($_SESSION['message']); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <?php
-                unset($_SESSION['message']); // Clear the message after displaying
-                unset($_SESSION['message_type']); // Clear the message type after displaying
-                ?>
+                <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
             <?php endif; ?>
+
 
             <!-- Search and Add New Button Container -->
             <h2 class="text-center">Events List</h2>

@@ -26,6 +26,7 @@ $routes = [
     '/events/register' => 'controllers/events/register.php',
     '/events/confirmation' => 'controllers/events/confirmation.php',
     '/events' => 'controllers/events/allEvents.php',
+    '/admin/events/generate_report' => 'controllers/events/report.php'
 
 ];
 

@@ -10,11 +10,22 @@ require('views/admin/partials/sidebar.view.php');
 
         <div class="row d-flex justify-content-center align-items-start main-content p-md-3 p-sm-1">
             <div class="col-md-8">
+                <?php if (isset($_SESSION['message'])): ?>
+                    <div class="alert alert-<?= $_SESSION['message_type'] ?? 'success'; ?> alert-dismissible fade show text-center custom-alert"
+                        role="alert" id="auto-dismiss-alert">
+                        <?= htmlspecialchars($_SESSION['message']); ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
+                <?php endif; ?>
+
 
                 <!-- Back Button -->
                 <div class="mb-3">
-                    <a href="/admin/events">
-                        <button class="btn btn-secondary mt-2">Back to Events</button>
+                    <a href="/admin/events" class="btn btn-secondary mt-2">Back to Events</a>
+
+                    <a href="/admin/events/generate_report?event_id=<?= $event['id']; ?>" class="btn btn-success mt-2">
+                        Generate Report
                     </a>
                 </div>
 

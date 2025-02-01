@@ -102,6 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Redirect to the event creation page after form submission
-    header('Location: /admin/events/create');
+    header('Location: /admin/events');
     exit();
 }
