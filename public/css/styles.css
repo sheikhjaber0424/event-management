@@ -61,7 +61,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .custom-alert {
@@ -71,6 +71,47 @@ a:hover {
   transform: translateX(-50%);
   z-index: 1050;
   width: 20%;
+}
+
+.event-img {
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px 8px 0 0;
+}
+
+.event-date {
+  background: rgba(14, 12, 12, 0.9);
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-footer {
+  font-size: 0.85rem;
+}
+
+/* Ensure single event is centered */
+@media (max-width: 767px) {
+  .row-cols-1 .col {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 /* Responsive: Adjust for small screens */

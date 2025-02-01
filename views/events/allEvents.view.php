@@ -18,42 +18,48 @@
 
         <button type="submit" class="btn btn-primary ms-2"><i class="fas fa-search"></i></button>
     </form>
+
     <!-- Events Grid -->
-    <section class="mt-1">
-        <div class="row <?= count($events) === 1 ? 'justify-content-center' : 'row-cols-1 row-cols-md-3'; ?> g-3">
+    <section class="mt-4">
+        <div class="row g-4 <?= count($events) === 1 ? 'justify-content-center' : 'row-cols-1 row-cols-md-2 row-cols-lg-3'; ?>">
             <?php if (empty($events)): ?>
                 <p class="text-center">No events found.</p>
             <?php else: ?>
                 <?php foreach ($events as $event): ?>
-                    <div class="col <?= count($events) === 1 ? 'col-md-6 col-lg-4 d-flex justify-content-center' : ''; ?>">
+                    <div class="col d-flex">
+                        <div class="card border-0 shadow-lg h-100 overflow-hidden" style="width: 100%; max-width: 320px;">
+                            <!-- Image Section with Overlay -->
+                            <div class="position-relative">
+                                <img src="<?= '/' . htmlspecialchars($event['image']); ?>"
+                                    class="card-img-top img-fluid event-img"
+                                    alt="<?= htmlspecialchars($event['name']); ?>">
+                                <div class="overlay"></div>
+                                <span class="badge event-date position-absolute top-0 start-0 m-2 px-3 py-1">
+                                    <?= date("M d", strtotime($event['date'])); ?>
+                                </span>
+                            </div>
 
-                        <div style="max-width: 280px; margin: auto; min-height: 300px;">
-                            <div class="card shadow-sm position-relative h-100 d-flex flex-column"
-                                style="max-width: 280px; margin: auto; min-height: 300px;">
-
-                                <!-- Image with Status Badge on Top Right -->
-                                <div class="position-relative">
-                                    <a href="/event?id=<?= $event['id']; ?>" class="text-decoration-none text-dark">
-                                        <img src="<?= '/' . htmlspecialchars($event['image']); ?>" class="card-img-top"
-                                            style="height: 140px; object-fit: cover;">
+                            <!-- Card Body -->
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title"><?= htmlspecialchars($event['name']); ?></h5>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($event['location']); ?></p>
+                                <p class="card-text text-muted"><?= substr(htmlspecialchars($event['description']), 0, 80); ?>...</p>
+                                <div class="mt-auto">
+                                    <a href="/event?id=<?= $event['id']; ?>"
+                                        class="btn  <?= $event['is_full'] ? 'btn-secondary' : 'btn-primary'; ?> w-100">
+                                        View Event
                                     </a>
-                                    <span class="badge position-absolute top-0 end-0 m-2 
-                                    <?= $event['is_full'] ? 'bg-danger' : 'bg-success'; ?>"
-                                        style="font-size: 0.75em; padding: 6px 10px;">
-                                        <?= $event['is_full'] ? 'Closed' : 'Open'; ?>
-                                    </span>
                                 </div>
-                                <a href="/event?id=<?= $event['id']; ?>" class="text-decoration-none text-dark">
-                                    <div class="card-body flex-grow-1">
-                                        <h5 class="card-title text-truncate"><?= htmlspecialchars($event['name']); ?></h5>
-                                        <p class="card-text"><strong>Date:</strong> <?= date("F d, Y", strtotime($event['date'])); ?></p>
-                                        <p class="card-text"><strong>Location:</strong> <?= htmlspecialchars($event['location']); ?></p>
-                                        <p class="card-text text-truncate"><?= htmlspecialchars($event['description']); ?></p>
-                                    </div>
-                                </a>
+                            </div>
+
+                            <!-- Card Footer -->
+                            <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="fas fa-users"></i> <?= $event['registration_count']; ?> Attending</small>
+                                <span class="badge <?= $event['is_full'] ? 'bg-danger' : 'bg-success'; ?>">
+                                    <?= $event['is_full'] ? 'Closed' : 'Open'; ?>
+                                </span>
                             </div>
                         </div>
-
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
