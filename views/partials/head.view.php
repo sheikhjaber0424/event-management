@@ -1,3 +1,4 @@
+<!-- HEAD START -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,3 +13,5 @@
 </head>
 
 <body>
+
+    <!-- HEAD END -->

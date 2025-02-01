@@ -101,6 +101,48 @@ body {
   width: 20%;
 }
 
+/* Specific styling for the welcome card */
+.welcome-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 80%;
+  max-width: 600px;
+}
+
+/* Card text styling */
+.welcome-card h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Media Queries for responsiveness */
+
+/* For large screens (desktops/tablets) */
+@media (min-width: 768px) {
+  .welcome-card {
+    width: 60%;
+    padding: 40px;
+  }
+
+  .welcome-card h1 {
+    font-size: 32px;
+  }
+}
+
+/* For very large screens (e.g., large desktop screens) */
+@media (min-width: 1200px) {
+  .welcome-card {
+    width: 50%;
+    padding: 60px;
+  }
+
+  .welcome-card h1 {
+    font-size: 40px;
+  }
+}
 /* Responsive: Adjust for small screens */
 @media (max-width: 768px) {
   .custom-alert {

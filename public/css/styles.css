@@ -105,7 +105,6 @@ a:hover {
 .card-footer {
   font-size: 0.85rem;
 }
-
 /* Ensure single event is centered */
 @media (max-width: 767px) {
   .row-cols-1 .col {

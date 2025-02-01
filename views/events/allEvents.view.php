@@ -42,7 +42,7 @@
                             <!-- Card Body -->
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title"><?= htmlspecialchars($event['name']); ?></h5>
-                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($event['location']); ?></p>
+                                <!-- <p class="card-text"><i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($event['location']); ?></p> -->
                                 <p class="card-text text-muted"><?= substr(htmlspecialchars($event['description']), 0, 80); ?>...</p>
                                 <div class="mt-auto">
                                     <a href="/event?id=<?= $event['id']; ?>"
