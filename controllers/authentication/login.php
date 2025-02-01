@@ -44,11 +44,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['message_type'] = 'success';
 
         unset($_SESSION['old'], $_SESSION['errors']); // Clear old input & errors
-        header('Location: /dashboard');
+        if (isset($_SESSION['is_admin']) && ($_SESSION['is_admin'] === 1 || $_SESSION['is_admin'] === 2)) {
+            header('Location: /admin/dashboard');
+            exit(); // Prevent further execution
+        } else {
+            header('Location: /');
+            exit();
+        }
+
         exit();
     } else {
         $_SESSION['message'] = 'Invalid email or password!';
         $_SESSION['message_type'] = 'danger';
+
         header('Location: /login');
         exit();
     }

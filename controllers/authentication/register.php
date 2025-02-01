@@ -7,7 +7,7 @@ $db = new Database($config['database']);
 
 // Redirect logged-in users away from registration
 if (isset($_SESSION['user_id'])) {
-    header('Location: /dashboard');
+    header('Location: /admin/dashboard');
     exit();
 }
 

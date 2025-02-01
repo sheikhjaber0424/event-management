@@ -17,9 +17,7 @@ require('views/admin/partials/sidebar.view.php');
 
 
                 <div class="mb-1">
-                    <a href="/admin/events">
-                        <button class="btn btn-secondary">Back</button>
-                    </a>
+
                 </div>
 
                 <h2 class="text-center mb-3">Create Event</h2>
@@ -65,9 +63,11 @@ require('views/admin/partials/sidebar.view.php');
                                     <div class="invalid-feedback"><?php echo $_SESSION['errors']['image']; ?></div>
                                 <?php endif; ?>
                             </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Create Event</button>
+                            <div class="mb-3 d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <a href="/admin/events" class="btn btn-secondary"><i class="fas fa-arrow-circle-left"></i> Back</a>
                             </div>
+
                         </form>
                     </div>
                 </div>

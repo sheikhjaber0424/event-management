@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $userId = $_SESSION['user_id'];
     $eventId = $_POST['event_id'] ?? null;
-    $ticketNumber = $_POST['tickets'] ?? 1; // Ensure integer input
+    $ticketNumber = (int) ($_POST['tickets'] ?? 1); // Ensure integer input
 
     if (empty($eventId)) {
         $errors['event_id'] = "Event ID is required.";
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Fetch event details
-    $event = $db->query("SELECT capacity, registration_count FROM events WHERE id = ?", [$eventId])->fetch();
+    $event = $db->query("SELECT capacity, registration_count, is_full FROM events WHERE id = ?", [$eventId])->fetch();
 
     if (!$event) {
         $_SESSION['errors']['event'] = "Event not found.";
@@ -41,8 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Check if there is space available for the registration
-    if (($event['registration_count'] + $ticketNumber) > $event['capacity']) {
-        $_SESSION['errors']['tickets'] = "Not enough spots available.";
+    $remainingSpots = $event['capacity'] - $event['registration_count'];
+
+    if ($ticketNumber > $remainingSpots) {
+        $_SESSION['errors']['tickets'] = "Only $remainingSpots tickets left!";
         header("Location: /event?id=$eventId");
         exit();
     }
@@ -50,8 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Register user for the event
     $db->query("INSERT INTO event_registration (user_id, event_id, tickets) VALUES (?, ?, ?)", [$userId, $eventId, $ticketNumber]);
 
-    // Increase registration count instead of decreasing capacity
+    // Update registration count
     $db->query("UPDATE events SET registration_count = registration_count + ? WHERE id = ?", [$ticketNumber, $eventId]);
+
+    // Check if the event is now full and update `is_full` accordingly
+    $updatedEvent = $db->query("SELECT registration_count FROM events WHERE id = ?", [$eventId])->fetch();
+
+    if ($updatedEvent['registration_count'] == $event['capacity']) {
+        $db->query("UPDATE events SET is_full = 1 WHERE id = ?", [$eventId]);
+    }
 
     $_SESSION['message'] = "Event registration successful";
     $_SESSION['message_type'] = "success";

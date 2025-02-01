@@ -10,10 +10,18 @@ $events = $db->query("SELECT * FROM events LIMIT 6")->fetchAll();
 ?>
 
 <main class="container mt-5 mb-5">
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="alert alert-<?= $_SESSION['message_type'] ?? 'success'; ?> alert-dismissible fade show text-center custom-alert"
+            role="alert" id="auto-dismiss-alert">
+            <?= htmlspecialchars($_SESSION['message']); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
+    <?php endif; ?>
     <div class="px-1  text-center mb-5">
-        <h1 class="display-5 fw-bold">Welcome to EventzBD</h1>
+        <h1 class="display-5 fw-bold">Welcome to Eventify</h1>
         <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">EventzBD is your go-to platform for organizing and managing events. Create, promote, and manage events effortlessly, and allow users to register and stay updated on event details. Simplify the process of event planning with our easy-to-use tools and responsive design.</p>
+            <p class="lead mb-4">Eventify is your go-to platform for organizing and managing events. Create, promote, and manage events effortlessly, and allow users to register and stay updated on event details. Simplify the process of event planning with our easy-to-use tools and responsive design.</p>
 
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Create an Event</button>

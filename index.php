@@ -6,13 +6,7 @@ require_once('core/functions.php');
 require_once('core/Database.php');
 
 
-// Redirect to home page
-
-
-
 // // dd('hello');
-
-
 
 // // $id = $_GET['id'];
 // // $query = "SELECT * FROM users WHERE id = :id";

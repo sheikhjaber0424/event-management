@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">My Website</a>
+        <a class="navbar-brand text-decoration-none" href="/">Eventify</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,10 +17,12 @@
                             <?= htmlspecialchars($_SESSION['user_name']); ?> <!-- Display username -->
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                            <?php if (isset($_SESSION['is_admin']) && ($_SESSION['is_admin'] === 1 || $_SESSION['is_admin'] === 2)): ?>
+                                <li><a class="dropdown-item text-decoration-none" href="/admin/dashboard">Dashboard</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            <?php endif; ?>
                             <li>
                                 <form action="/logout" method="POST" class="d-inline">
                                     <button type="submit" class="dropdown-item">Logout</button>

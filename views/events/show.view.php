@@ -36,15 +36,17 @@ require('views/partials/navbar.view.php');
                     <div class="alert alert-info">
                         You are already registered for this event. (Tickets booked: <?= htmlspecialchars($existingRegistration['tickets']); ?>)
                     </div>
-                    <a href="#" class="btn btn-secondary disabled">Already Registered</a>
+
 
                 <?php elseif ($event['is_full'] == 1): ?>
                     <p class="text-danger"> Registration for this event is closed.</p>
 
                 <?php else: ?>
-                    <a class="text-decoration-none" href="<?= $eventRegisterUrl; ?>">
-                        <button class="btn btn-success">Register</button>
-                    </a>
+                    <?php if ($_SESSION['is_admin'] == 3): ?>
+                        <a class="text-decoration-none" href="<?= $eventRegisterUrl; ?>">
+                            <button class="btn btn-success">Register</button>
+                        </a>
+                    <?php endif; ?>
                 <?php endif; ?>
                 <a href="/events">
                     <button class="btn btn-primary">Events</button></a>

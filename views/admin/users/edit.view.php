@@ -22,7 +22,7 @@ require('views/admin/partials/sidebar.view.php');
 
                 <div class="mb-1">
                     <a href="/admin/users">
-                        <button class="btn btn-secondary">Back</button>
+                        <button class="btn btn-secondary"> <i class="fas fa-arrow-circle-left"></i> Back</button>
                     </a>
                 </div>
 

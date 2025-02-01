@@ -26,7 +26,7 @@ require('views/admin/partials/sidebar.view.php');
             <div class="d-flex justify-content-between align-items-center  w-100">
                 <!-- Add New Button -->
                 <a href="/admin/events/create" class="ms-2">
-                    <button class="btn btn-primary">Add New</button>
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> Add New</button>
                 </a>
 
                 <!-- Search Form -->

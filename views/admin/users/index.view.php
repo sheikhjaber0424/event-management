@@ -23,7 +23,7 @@ require('views/admin/partials/sidebar.view.php');
             <h2 class="text-center">Users List</h2>
             <div class="d-flex justify-content-between align-items-center w-100">
                 <a href="/admin/users/create" class="ms-2">
-                    <button class="btn btn-primary">Add New</button>
+                    <button class="btn btn-primary"><i class="fa fa-plus"></i> Add New</button>
                 </a>
 
                 <!-- Search Form -->
@@ -44,7 +44,9 @@ require('views/admin/partials/sidebar.view.php');
                             <th>Name</th>
                             <th>Email</th>
                             <th>User Type</th>
-                            <th>Actions</th>
+                            <?php if ($_SESSION['is_admin'] == 1): ?>
+                                <th>Actions</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,12 +65,10 @@ require('views/admin/partials/sidebar.view.php');
                                     }
                                     ?></td>
                                 <td>
-                                    <?php if ($_SESSION['is_admin'] == 3): ?>
+
+
+                                    <?php if ($_SESSION['is_admin'] == 1): ?>
                                         <a href="/admin/users/edit?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
-                                    <?php endif; ?>
-
-
-                                    <?php if ($user['is_admin'] == 2 || $user['is_admin'] == 3): ?>
                                         <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
                                             <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>

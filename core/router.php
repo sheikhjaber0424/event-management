@@ -1,13 +1,13 @@
 <?php
 
-$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
+$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 $routes = [
     '/' =>  'index.view.php',
     '/login' => 'controllers/authentication/login.php',
     '/register' => 'controllers/authentication/register.php',
-    '/dashboard' => 'controllers/authentication/dashboard.php',
+    '/admin/dashboard' => 'controllers/authentication/dashboard.php',
     '/logout' => 'controllers/authentication/logout.php',
     '/admin/events' => 'controllers/admin/events/index.php',
     '/admin/event' => 'controllers/admin/events/show.php',
@@ -28,11 +28,24 @@ $routes = [
     '/events' => 'controllers/events/allEvents.php',
     '/admin/events/generate_report' => 'controllers/events/report.php',
     '/admin/attendees' => 'controllers/admin/attendees/index.php'
-
 ];
 
+/**
+ * Restrict access to admin routes
+ */
+function checkAdminAccess($uri)
+{
+    if (strpos($uri, '/admin') === 0) { // If route starts with "/admin"
+        if (!isset($_SESSION['is_admin']) || ($_SESSION['is_admin'] !== 1 && $_SESSION['is_admin'] !== 2)) {
+            header("Location: /"); // Redirect to homepage if not admin
+            exit();
+        }
+    }
+}
 
-
+/**
+ * Route the request to the appropriate controller or view
+ */
 function routeToController($uri, $routes)
 {
     if (array_key_exists($uri, $routes)) {
@@ -42,13 +55,18 @@ function routeToController($uri, $routes)
     }
 }
 
+/**
+ * Show a 404 page if the route is not found
+ */
 function abort()
 {
     http_response_code(404);
-
     echo "Page not found!";
-
-    die();
+    exit();
 }
 
+// Apply admin check before routing
+checkAdminAccess($uri);
+
+// Route the request
 routeToController($uri, $routes);

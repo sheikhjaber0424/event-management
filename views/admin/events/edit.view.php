@@ -18,12 +18,6 @@ require('views/admin/partials/sidebar.view.php');
                 <?php endif; ?>
 
 
-                <div class="mb-1">
-                    <a href="/admin/events">
-                        <button class="btn btn-secondary">Back to events</button>
-                    </a>
-                </div>
-
                 <h2 class="text-center mb-3">Edit Event</h2>
                 <div class="card">
                     <div class="card-body">
@@ -72,9 +66,14 @@ require('views/admin/partials/sidebar.view.php');
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <div class="mb-3 mt-2">
+                            <div class="mb-3 mt-2 d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Update</button>
+
+                                <a href="/admin/events" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-circle-left"></i> Back
+                                </a>
                             </div>
+
                         </form>
                     </div>
                 </div>
