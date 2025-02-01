@@ -6,7 +6,7 @@
 
     <!-- Search Bar -->
     <form method="GET" action="/events" class="d-flex justify-content-center mb-3">
-        <input type="text" name="search" class="form-control w-50" placeholder="Search events..."
+        <input type="text" name="search" class="form-control w-50" placeholder="Search"
             value="<?= htmlspecialchars($search); ?>" />
 
         <!-- Status Filter Dropdown -->
@@ -16,7 +16,7 @@
             <option value="closed" <?= $status === 'closed' ? 'selected' : ''; ?>>Closed</option>
         </select>
 
-        <button type="submit" class="btn btn-primary ms-2">Search</button>
+        <button type="submit" class="btn btn-primary ms-2"><i class="fas fa-search"></i></button>
     </form>
     <!-- Events Grid -->
     <section class="mt-1">

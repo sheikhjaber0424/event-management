@@ -32,8 +32,8 @@ require('views/admin/partials/sidebar.view.php');
                 <!-- Search Form -->
                 <form action="/admin/events" method="GET" class="mb-0">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search by name or desc..">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <input type="text" class="form-control" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
@@ -50,7 +50,6 @@ require('views/admin/partials/sidebar.view.php');
                             <th>Date</th>
                             <th>Capacity</th>
                             <th>Registration</th>
-                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -62,14 +61,7 @@ require('views/admin/partials/sidebar.view.php');
                                 <td><?= date('F j, Y', strtotime($event['date'])) ?></td>
                                 <td><?= htmlspecialchars($event['capacity']) ?></td>
                                 <td><?= htmlspecialchars($event['registration_count']) ?></td>
-                                <td>
-                                    <?php if (!empty($event['image'])) : ?>
-                                        <img src="<?= '/' . $event['image']; ?>" alt="Event Image" width="50">
 
-                                    <?php else : ?>
-                                        No Image
-                                    <?php endif; ?>
-                                </td>
                                 <td>
                                     <a href="/admin/event?id=<?= $event['id'] ?>" class="btn btn-sm btn-success">View</a>
                                     <a href="/admin/events/edit?id=<?= $event['id'] ?>" class="btn btn-sm btn-primary">Edit</a>

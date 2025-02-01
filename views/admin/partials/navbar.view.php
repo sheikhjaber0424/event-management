@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
     <div class="container-fluid">
-        <span class="navbar-brand">Dashboard</span>
+        <a href="/" class="text-decoration-none">
+            <h3 class="navbar-brand">Eventify</h3>
+        </a>
 
         <!-- Dropdown for Logout on large screens -->
         <div class="dropdown d-none d-lg-block logout">

@@ -22,10 +22,10 @@ require('views/admin/partials/sidebar.view.php');
 
                 <!-- Back Button -->
                 <div class="mb-3">
-                    <a href="/admin/events" class="btn btn-secondary mt-2">Back to Events</a>
+                    <a href="/admin/events" class="btn btn-secondary mt-2"><i class="fas fa-arrow-circle-left"></i> Back</a>
 
                     <a href="/admin/events/generate_report?event_id=<?= $event['id']; ?>" class="btn btn-success mt-2">
-                        Generate Report
+                        <i class="fas fa-download"></i> Generate Report
                     </a>
                 </div>
 

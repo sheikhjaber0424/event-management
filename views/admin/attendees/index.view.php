@@ -15,8 +15,8 @@ require('views/admin/partials/sidebar.view.php');
             <div class="d-flex justify-content-end align-items-center w-100 mb-3">
                 <form action="/admin/attendees" method="GET" class="mb-0">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search by name, email, or event..">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <input type="text" class="form-control" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>

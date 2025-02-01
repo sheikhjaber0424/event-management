@@ -29,8 +29,8 @@ require('views/admin/partials/sidebar.view.php');
                 <!-- Search Form -->
                 <form action="/admin/users" method="GET" class="mb-0">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search by name or email..">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <input type="text" class="form-control" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
