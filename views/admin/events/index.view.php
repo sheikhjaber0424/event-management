@@ -49,6 +49,7 @@ require('views/admin/partials/sidebar.view.php');
                             <th>Name</th>
                             <th>Date</th>
                             <th>Capacity</th>
+                            <th>Registration</th>
                             <th>Image</th>
                             <th>Actions</th>
                         </tr>
@@ -60,6 +61,7 @@ require('views/admin/partials/sidebar.view.php');
                                 <td><?= htmlspecialchars($event['name']) ?></td>
                                 <td><?= date('F j, Y', strtotime($event['date'])) ?></td>
                                 <td><?= htmlspecialchars($event['capacity']) ?></td>
+                                <td><?= htmlspecialchars($event['registration_count']) ?></td>
                                 <td>
                                     <?php if (!empty($event['image'])) : ?>
                                         <img src="<?= '/' . $event['image']; ?>" alt="Event Image" width="50">

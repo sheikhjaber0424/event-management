@@ -56,6 +56,10 @@ require('views/admin/partials/sidebar.view.php');
                             <div class="col-md-6">
                                 <p><strong>Date:</strong> <?php echo date('F j, Y', strtotime($event['date'])); ?></p>
                                 <p><strong>Capacity:</strong> <?php echo number_format($event['capacity']); ?> attendees</p>
+                                <p><strong>Registrations:</strong> <?php echo number_format($event['registration_count']); ?> people</p>
+                                <p><strong>Available Spots:</strong>
+                                    <?php echo max(0, $event['capacity'] - $event['registration_count']); ?>
+                                </p>
                             </div>
                             <div class="col-md-6">
                                 <?php if (!empty($event['location'])): ?>
@@ -63,6 +67,7 @@ require('views/admin/partials/sidebar.view.php');
                                 <?php endif; ?>
                             </div>
                         </div>
+
 
                         <!-- Edit Button -->
                         <div class="mt-4">

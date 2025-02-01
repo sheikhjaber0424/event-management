@@ -7,8 +7,10 @@ require('views/partials/navbar.view.php');
 
 <main class="container mt-5 mb-5">
     <?php if (isset($_SESSION['message'])): ?>
-        <div class="alert alert-<?= $_SESSION['message_type'] ?? 'success'; ?> alert-dismissible fade show text-center" role="alert" id="auto-dismiss-alert">
+        <div class="alert alert-<?= $_SESSION['message_type'] ?? 'success'; ?> alert-dismissible fade show text-center custom-alert"
+            role="alert" id="auto-dismiss-alert">
             <?= htmlspecialchars($_SESSION['message']); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
     <?php endif; ?>
@@ -25,7 +27,9 @@ require('views/partials/navbar.view.php');
                 <h1 class="fw-bold"> <?= htmlspecialchars($event['name']); ?> </h1>
                 <p class="text-muted"><strong>Date:</strong> <?= date("F d, Y", strtotime($event['date'])); ?></p>
                 <p><strong>Location:</strong> <?= htmlspecialchars($event['location']); ?></p>
-                <p><strong>Capacity:</strong> <?= htmlspecialchars($event['capacity']); ?> people</p>
+                <p><strong>Maximum Capacity:</strong> <?= htmlspecialchars($event['capacity']); ?> people</p>
+                <p><strong>Remaining Spots:</strong> <?= htmlspecialchars($event['capacity'] - $event['registration_count']); ?> </p>
+
                 <p><?= nl2br(htmlspecialchars($event['description'])); ?></p>
 
                 <?php if ($isLoggedIn && $existingRegistration): ?>
@@ -35,15 +39,14 @@ require('views/partials/navbar.view.php');
                     <a href="#" class="btn btn-secondary disabled">Already Registered</a>
 
                 <?php elseif ($event['is_full'] == 1): ?>
-                    <p class="text-danger"> Registration for this event is closed. The event is full.</p>
+                    <p class="text-danger"> Registration for this event is closed.</p>
 
                 <?php else: ?>
-                    <a href="<?= $eventRegisterUrl; ?>">
-
-                        <button class="btn btn-success">Register</button></a>
+                    <a class="text-decoration-none" href="<?= $eventRegisterUrl; ?>">
+                        <button class="btn btn-success">Register</button>
+                    </a>
                 <?php endif; ?>
                 <a href="/events">
-
                     <button class="btn btn-primary">Events</button></a>
             </div>
         </div>

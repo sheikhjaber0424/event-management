@@ -8,11 +8,19 @@ require('views/admin/partials/sidebar.view.php');
     <div class=" container px-3">
         <div class="row d-flex justify-content-center align-items-center main-content">
             <div class="col-md-6">
+                <?php if (isset($_SESSION['message'])): ?>
+                    <div class="alert alert-<?= $_SESSION['message_type'] ?? 'success'; ?> alert-dismissible fade show text-center custom-alert"
+                        role="alert" id="auto-dismiss-alert">
+                        <?= htmlspecialchars($_SESSION['message']); ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
+                <?php endif; ?>
 
 
                 <div class="mb-1">
                     <a href="/admin/events">
-                        <button class="btn btn-secondary">Back</button>
+                        <button class="btn btn-secondary">Back to events</button>
                     </a>
                 </div>
 
@@ -60,12 +68,12 @@ require('views/admin/partials/sidebar.view.php');
                                 <?php endif; ?>
                                 <?php if ($event['image']): ?>
                                     <div class="mt-2">
-                                        <img src="/uploads/<?php echo $event['image']; ?>" alt="Event Image" class="img-fluid" width="100">
+                                        <img src="/<?php echo $event['image']; ?>" alt="Event Image" class="img-fluid" width="150">
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Update Event</button>
+                            <div class="mb-3 mt-2">
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>

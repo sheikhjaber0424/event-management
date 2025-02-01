@@ -12,7 +12,7 @@ $eventId = $_GET['id'] ?? null;
 $config = require('core/config.php');
 $db = new Database($config['database']);
 
-$event = $db->query("SELECT name, capacity FROM events WHERE id = ?", [$eventId])->fetch();
+$event = $db->query("SELECT name, capacity, registration_count FROM events WHERE id = ?", [$eventId])->fetch();
 
 if (!$event) {
     die("Event not found.");

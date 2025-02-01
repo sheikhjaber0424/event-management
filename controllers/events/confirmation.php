@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Fetch event details
-    $event = $db->query("SELECT capacity FROM events WHERE id = ?", [$eventId])->fetch();
+    $event = $db->query("SELECT capacity, registration_count FROM events WHERE id = ?", [$eventId])->fetch();
 
     if (!$event) {
         $_SESSION['errors']['event'] = "Event not found.";
@@ -40,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // Check if enough tickets are available
-    if ($event['capacity'] < $ticketNumber) {
-        $_SESSION['errors']['tickets'] = "Not enough tickets available.";
+    // Check if there is space available for the registration
+    if (($event['registration_count'] + $ticketNumber) > $event['capacity']) {
+        $_SESSION['errors']['tickets'] = "Not enough spots available.";
         header("Location: /event?id=$eventId");
         exit();
     }
@@ -50,16 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Register user for the event
     $db->query("INSERT INTO event_registration (user_id, event_id, tickets) VALUES (?, ?, ?)", [$userId, $eventId, $ticketNumber]);
 
-    // Decrease event capacity
-    $newCapacity = $event['capacity'] - $ticketNumber;
-    $db->query("UPDATE events SET capacity = ? WHERE id = ?", [$newCapacity, $eventId]);
+    // Increase registration count instead of decreasing capacity
+    $db->query("UPDATE events SET registration_count = registration_count + ? WHERE id = ?", [$ticketNumber, $eventId]);
 
-    // If the new capacity is 0, mark the event as full
-    if ($newCapacity == 0) {
-        $db->query("UPDATE events SET is_full = 1 WHERE id = ?", [$eventId]);
-    }
-
-    $_SESSION['message'] = "You have successfully registered for the event.";
+    $_SESSION['message'] = "Event registration successful";
     $_SESSION['message_type'] = "success";
 
     header("Location: /event?id=$eventId");
