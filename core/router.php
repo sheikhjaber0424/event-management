@@ -4,7 +4,7 @@
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 $routes = [
-    '/' =>  'index.view.php',
+    '/' =>  'controllers/home/index.php',
     '/login' => 'controllers/authentication/login.php',
     '/register' => 'controllers/authentication/register.php',
     '/admin/dashboard' => 'controllers/authentication/dashboard.php',
@@ -29,7 +29,6 @@ $routes = [
     '/admin/events/generate_report' => 'controllers/events/report.php',
     '/admin/attendees' => 'controllers/admin/attendees/index.php',
     '/api/events' => 'controllers/api/events.php',
-
 ];
 
 /**

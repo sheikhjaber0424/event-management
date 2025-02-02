@@ -22,7 +22,7 @@ require('views/admin/partials/sidebar.view.php');
 
                 <!-- Back Button -->
                 <div class="mb-3">
-                    <a href="/admin/events" class="btn btn-secondary mt-2"><i class="fas fa-arrow-circle-left"></i> Back</a>
+
 
                     <a href="/admin/events/generate_report?event_id=<?= $event['id']; ?>" class="btn btn-success mt-2">
                         <i class="fas fa-download"></i> Generate Report
@@ -70,8 +70,11 @@ require('views/admin/partials/sidebar.view.php');
 
 
                         <!-- Edit Button -->
-                        <div class="mt-4">
+                        <div class="d-flex justify-content-between mt-3">
+
                             <a href="/admin/events/edit?id=<?php echo $event['id']; ?>" class="btn btn-primary">Edit Event</a>
+
+                            <a href="/admin/events" class="btn btn-secondary "><i class="fas fa-arrow-circle-left"></i> Back</a>
                         </div>
                     </div>
                 </div>
