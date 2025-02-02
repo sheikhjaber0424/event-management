@@ -23,7 +23,7 @@
     <section class="mt-4">
         <div class="row g-4 <?= count($events) === 1 ? 'justify-content-center' : 'row-cols-1 row-cols-md-2 row-cols-lg-3'; ?>">
             <?php if (empty($events)): ?>
-                <p class="text-center">No events found.</p>
+
             <?php else: ?>
                 <?php foreach ($events as $event): ?>
                     <div class="col d-flex">
