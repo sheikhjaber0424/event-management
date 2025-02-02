@@ -1,15 +1,39 @@
 window.onload = function () {
   var alertMessage = document.getElementById("auto-dismiss-alert");
   if (alertMessage) {
-    // After 2 seconds, fade out and remove the alert from the DOM
     setTimeout(function () {
       alertMessage.classList.remove("show");
       alertMessage.classList.add("fade");
 
-      // After the fade, remove the alert element from the DOM
       setTimeout(function () {
         alertMessage.remove();
-      }, 500); // Wait for the fade-out transition to complete (Bootstrap's fade duration)
-    }, 3000); // 2000 milliseconds = 2 seconds
+      }, 500);
+    }, 3000);
   }
 };
+
+$("#registrationForm").submit(function (event) {
+  event.preventDefault();
+
+  $.ajax({
+    url: "/events/confirmation",
+    type: "POST",
+    data: $(this).serialize(),
+    dataType: "json",
+    success: function (data) {
+      if (data.success) {
+        $("#registrationForm").hide();
+        $("#back-event").hide();
+        $("#register-header").hide();
+        $("#successMessage").removeClass("d-none");
+      } else {
+        $("#alertContainer").html(
+          `<div class="alert alert-danger">${data.message}</div>`
+        );
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error:", error);
+    },
+  });
+});

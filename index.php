@@ -5,7 +5,6 @@ require_once('core/router.php');
 require_once('core/functions.php');
 require_once('core/Database.php');
 
-
 // // dd('hello');
 
 // // $id = $_GET['id'];

@@ -22,9 +22,12 @@ require('views/admin/partials/sidebar.view.php');
             <!-- Search and Add New Button Container -->
             <h2 class="text-center">Users List</h2>
             <div class="d-flex justify-content-between align-items-center w-100">
-                <a href="/admin/users/create" class="ms-2">
-                    <button class="btn btn-primary"><i class="fa fa-plus"></i> Add New</button>
-                </a>
+
+                <?php if ($_SESSION['is_admin'] == 1): ?>
+                    <a href="/admin/users/create" class="ms-2">
+                        <button class="btn btn-primary"><i class="fa fa-plus"></i> Add New</button>
+                    </a>
+                <?php endif; ?>
 
                 <!-- Search Form -->
                 <form action="/admin/users" method="GET" class="mb-0">
@@ -67,7 +70,7 @@ require('views/admin/partials/sidebar.view.php');
                                 <td>
 
 
-                                    <?php if ($_SESSION['is_admin'] == 1): ?>
+                                    <?php if ($_SESSION['is_admin'] == 1 && $user['is_admin'] != 1): ?>
                                         <a href="/admin/users/edit?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Edit</a>
                                         <form action="/admin/users/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
                                             <input type="hidden" name="id" value="<?= $user['id'] ?>">
